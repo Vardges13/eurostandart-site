@@ -1,0 +1,1057 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Евростандарт — Комплексное оснащение отелей под ключ</title>
+    <meta name="description" content="ООО Евростандарт — комплексное оснащение отелей под ключ. Мебель, ковровые покрытия, двери, шторы, свет, постельное бельё, изделия из камня.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --navy: #1a2354;
+            --navy-deep: #0f1633;
+            --gold: #c9a96e;
+            --gold-light: #ddc396;
+            --gold-pale: #f0e4cc;
+            --cream: #faf7f2;
+            --white: #ffffff;
+            --text: #2a2a2a;
+            --text-light: #6b6b6b;
+            --overlay: rgba(15, 22, 51, 0.7);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Raleway', sans-serif;
+            color: var(--text);
+            background: var(--cream);
+            overflow-x: hidden;
+        }
+
+        /* ─── PRELOADER ─── */
+        .preloader {
+            position: fixed; inset: 0; z-index: 9999;
+            background: var(--navy-deep);
+            display: flex; align-items: center; justify-content: center;
+            transition: opacity 0.8s ease, visibility 0.8s ease;
+        }
+        .preloader.hidden { opacity: 0; visibility: hidden; }
+        .preloader-logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3rem; font-weight: 600;
+            color: var(--gold);
+            letter-spacing: 0.2em;
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 0.4; }
+            50% { opacity: 1; }
+        }
+
+        /* ─── NAV ─── */
+        nav {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+            padding: 1.2rem 4rem;
+            display: flex; align-items: center; justify-content: space-between;
+            transition: all 0.4s ease;
+            background: transparent;
+        }
+        nav.scrolled {
+            background: rgba(15, 22, 51, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 0.8rem 4rem;
+            box-shadow: 0 4px 30px rgba(0,0,0,0.2);
+        }
+        .nav-logo img {
+            height: 50px;
+            transition: height 0.4s ease;
+        }
+        nav.scrolled .nav-logo img { height: 40px; }
+        .nav-links {
+            display: flex; gap: 2.5rem; list-style: none;
+        }
+        .nav-links a {
+            color: var(--white);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            position: relative;
+            transition: color 0.3s;
+        }
+        .nav-links a::after {
+            content: '';
+            position: absolute; bottom: -4px; left: 0;
+            width: 0; height: 1px;
+            background: var(--gold);
+            transition: width 0.3s ease;
+        }
+        .nav-links a:hover { color: var(--gold); }
+        .nav-links a:hover::after { width: 100%; }
+        .nav-contact-btn {
+            color: var(--gold) !important;
+            border: 1px solid var(--gold);
+            padding: 0.6rem 1.5rem;
+            transition: all 0.3s ease !important;
+        }
+        .nav-contact-btn:hover {
+            background: var(--gold) !important;
+            color: var(--navy-deep) !important;
+        }
+        .nav-contact-btn::after { display: none !important; }
+
+        .burger {
+            display: none; cursor: pointer;
+            flex-direction: column; gap: 5px;
+        }
+        .burger span {
+            width: 25px; height: 2px;
+            background: var(--white);
+            transition: all 0.3s;
+        }
+
+        /* ─── HERO ─── */
+        .hero {
+            position: relative; height: 100vh; min-height: 700px;
+            display: flex; align-items: center; justify-content: center;
+            overflow: hidden;
+        }
+        .hero-bg {
+            position: absolute; inset: 0;
+            background: url('https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=1920&q=80') center/cover;
+        }
+        .hero-bg::after {
+            content: ''; position: absolute; inset: 0;
+            background: linear-gradient(
+                135deg,
+                rgba(15, 22, 51, 0.85) 0%,
+                rgba(26, 35, 84, 0.6) 50%,
+                rgba(15, 22, 51, 0.75) 100%
+            );
+        }
+        .hero-content {
+            position: relative; z-index: 2;
+            text-align: center; padding: 2rem;
+            max-width: 900px;
+        }
+        .hero-badge {
+            display: inline-block;
+            font-size: 0.75rem;
+            letter-spacing: 0.4em;
+            text-transform: uppercase;
+            color: var(--gold);
+            border: 1px solid rgba(201,169,110,0.4);
+            padding: 0.5rem 1.5rem;
+            margin-bottom: 2rem;
+            animation: fadeUp 1s ease 0.3s both;
+        }
+        .hero h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2.5rem, 6vw, 5rem);
+            font-weight: 500;
+            color: var(--white);
+            line-height: 1.15;
+            margin-bottom: 1.5rem;
+            animation: fadeUp 1s ease 0.5s both;
+        }
+        .hero h1 span { color: var(--gold); }
+        .hero-sub {
+            font-size: 1.1rem;
+            color: rgba(255,255,255,0.75);
+            line-height: 1.7;
+            max-width: 600px;
+            margin: 0 auto 2.5rem;
+            font-weight: 300;
+            animation: fadeUp 1s ease 0.7s both;
+        }
+        .hero-cta {
+            display: inline-flex; gap: 1rem;
+            animation: fadeUp 1s ease 0.9s both;
+        }
+        .btn-primary {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: var(--gold);
+            color: var(--navy-deep);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            transition: all 0.4s ease;
+        }
+        .btn-primary:hover {
+            background: var(--gold-light);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(201,169,110,0.3);
+        }
+        .btn-outline {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            border: 1px solid rgba(255,255,255,0.3);
+            color: var(--white);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            transition: all 0.4s ease;
+        }
+        .btn-outline:hover {
+            border-color: var(--gold);
+            color: var(--gold);
+        }
+        .hero-scroll {
+            position: absolute; bottom: 2rem; left: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
+            animation: bounce 2s ease infinite;
+        }
+        .hero-scroll span {
+            display: block; width: 24px; height: 40px;
+            border: 2px solid rgba(255,255,255,0.4);
+            border-radius: 12px;
+            position: relative;
+        }
+        .hero-scroll span::after {
+            content: ''; position: absolute;
+            top: 8px; left: 50%; transform: translateX(-50%);
+            width: 3px; height: 8px;
+            background: var(--gold);
+            border-radius: 2px;
+            animation: scrollDot 1.5s ease infinite;
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(10px); }
+        }
+        @keyframes scrollDot {
+            0% { top: 8px; opacity: 1; }
+            100% { top: 22px; opacity: 0; }
+        }
+
+        /* ─── STATS BAR ─── */
+        .stats-bar {
+            background: var(--navy-deep);
+            padding: 3rem 4rem;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+        }
+        .stat-item {
+            text-align: center;
+            border-right: 1px solid rgba(201,169,110,0.2);
+        }
+        .stat-item:last-child { border: none; }
+        .stat-num {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3rem; font-weight: 600;
+            color: var(--gold);
+            line-height: 1;
+            margin-bottom: 0.5rem;
+        }
+        .stat-label {
+            font-size: 0.8rem;
+            color: rgba(255,255,255,0.6);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        /* ─── SECTIONS COMMON ─── */
+        .section { padding: 7rem 4rem; }
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+        .section-tag {
+            font-size: 0.75rem;
+            letter-spacing: 0.35em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 1rem;
+            display: block;
+        }
+        .section-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 500;
+            color: var(--navy);
+            line-height: 1.2;
+            margin-bottom: 1rem;
+        }
+        .section-desc {
+            font-size: 1rem;
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.7;
+            font-weight: 300;
+        }
+        .gold-line {
+            width: 60px; height: 2px;
+            background: var(--gold);
+            margin: 1.5rem auto 0;
+        }
+
+        /* ─── ABOUT ─── */
+        .about { background: var(--white); }
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .about-image {
+            position: relative;
+            overflow: hidden;
+        }
+        .about-image img {
+            width: 100%; height: 500px;
+            object-fit: cover;
+            display: block;
+        }
+        .about-image::after {
+            content: '';
+            position: absolute; bottom: 0; right: 0;
+            width: 120px; height: 120px;
+            border-right: 3px solid var(--gold);
+            border-bottom: 3px solid var(--gold);
+        }
+        .about-text h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.2rem;
+            color: var(--navy);
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+        }
+        .about-text p {
+            color: var(--text-light);
+            line-height: 1.8;
+            margin-bottom: 1rem;
+            font-weight: 300;
+        }
+        .about-features {
+            display: grid; grid-template-columns: 1fr 1fr;
+            gap: 1rem; margin-top: 2rem;
+        }
+        .about-feature {
+            display: flex; align-items: center; gap: 0.8rem;
+            font-size: 0.9rem; color: var(--text);
+        }
+        .about-feature .icon {
+            width: 36px; height: 36px;
+            background: var(--cream);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1rem;
+            flex-shrink: 0;
+        }
+
+        /* ─── SERVICES ─── */
+        .services { background: var(--cream); }
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+        .service-card {
+            background: var(--white);
+            padding: 2.5rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.5s ease;
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+        .service-card::before {
+            content: '';
+            position: absolute; top: 0; left: 0; right: 0;
+            height: 3px;
+            background: var(--gold);
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+        .service-card:hover::before { transform: scaleX(1); }
+        .service-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.08);
+        }
+        .service-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+        .service-card h4 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.3rem;
+            color: var(--navy);
+            margin-bottom: 0.8rem;
+            font-weight: 600;
+        }
+        .service-card p {
+            font-size: 0.85rem;
+            color: var(--text-light);
+            line-height: 1.7;
+            font-weight: 300;
+        }
+
+        /* ─── PORTFOLIO ─── */
+        .portfolio { background: var(--navy-deep); }
+        .portfolio .section-title { color: var(--white); }
+        .portfolio .section-desc { color: rgba(255,255,255,0.6); }
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+        .portfolio-item {
+            position: relative; overflow: hidden;
+            height: 350px;
+            cursor: pointer;
+        }
+        .portfolio-item:first-child {
+            grid-column: span 2;
+            height: 400px;
+        }
+        .portfolio-item img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+        .portfolio-item:hover img {
+            transform: scale(1.08);
+        }
+        .portfolio-overlay {
+            position: absolute; inset: 0;
+            background: linear-gradient(to top, rgba(15,22,51,0.9), transparent 60%);
+            display: flex; flex-direction: column;
+            justify-content: flex-end;
+            padding: 2rem;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+        .portfolio-item:hover .portfolio-overlay { opacity: 1; }
+        .portfolio-overlay h4 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            color: var(--white);
+            margin-bottom: 0.3rem;
+        }
+        .portfolio-overlay p {
+            color: var(--gold);
+            font-size: 0.8rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+        }
+
+        /* ─── ADVANTAGES ─── */
+        .advantages { background: var(--white); }
+        .advantages-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3rem;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        .advantage-item {
+            text-align: center;
+            padding: 2rem 1.5rem;
+        }
+        .advantage-num {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 4rem;
+            font-weight: 300;
+            color: var(--gold);
+            line-height: 1;
+            margin-bottom: 1rem;
+            opacity: 0.7;
+        }
+        .advantage-item h4 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.4rem;
+            color: var(--navy);
+            margin-bottom: 0.8rem;
+            font-weight: 600;
+        }
+        .advantage-item p {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            line-height: 1.7;
+            font-weight: 300;
+        }
+
+        /* ─── CTA BANNER ─── */
+        .cta-banner {
+            position: relative;
+            padding: 6rem 4rem;
+            background: url('https://images.unsplash.com/photo-1566073771259-6a8506099945?w=1920&q=80') center/cover fixed;
+            text-align: center;
+        }
+        .cta-banner::after {
+            content: ''; position: absolute; inset: 0;
+            background: rgba(15,22,51,0.85);
+        }
+        .cta-content {
+            position: relative; z-index: 2;
+        }
+        .cta-content h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+            color: var(--white);
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+        .cta-content p {
+            color: rgba(255,255,255,0.7);
+            max-width: 500px;
+            margin: 0 auto 2rem;
+            line-height: 1.7;
+            font-weight: 300;
+        }
+
+        /* ─── CONTACT ─── */
+        .contact { background: var(--cream); }
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        .contact-info h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            color: var(--navy);
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+        }
+        .contact-info p {
+            color: var(--text-light);
+            line-height: 1.7;
+            margin-bottom: 2rem;
+            font-weight: 300;
+        }
+        .contact-item {
+            display: flex; align-items: flex-start; gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        .contact-item .ci-icon {
+            width: 48px; height: 48px;
+            background: var(--navy);
+            display: flex; align-items: center; justify-content: center;
+            color: var(--gold);
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+        .contact-item .ci-text h5 {
+            font-size: 0.75rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--text-light);
+            margin-bottom: 0.3rem;
+            font-weight: 600;
+        }
+        .contact-item .ci-text a,
+        .contact-item .ci-text span {
+            color: var(--navy);
+            text-decoration: none;
+            font-size: 1.05rem;
+            font-weight: 500;
+        }
+        .contact-item .ci-text a:hover { color: var(--gold); }
+        .contact-form {
+            background: var(--white);
+            padding: 3rem;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.05);
+        }
+        .contact-form h4 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            color: var(--navy);
+            margin-bottom: 1.5rem;
+        }
+        .form-group {
+            margin-bottom: 1.2rem;
+        }
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.9rem 1rem;
+            border: 1px solid #e0dcd6;
+            background: var(--cream);
+            font-family: 'Raleway', sans-serif;
+            font-size: 0.9rem;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: var(--gold);
+        }
+        .form-group textarea { resize: vertical; min-height: 120px; }
+        .form-submit {
+            width: 100%;
+            padding: 1rem;
+            background: var(--navy);
+            color: var(--gold);
+            border: none;
+            font-family: 'Raleway', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .form-submit:hover {
+            background: var(--gold);
+            color: var(--navy-deep);
+        }
+
+        /* ─── FOOTER ─── */
+        footer {
+            background: var(--navy-deep);
+            padding: 4rem;
+        }
+        .footer-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding-bottom: 3rem;
+            border-bottom: 1px solid rgba(201,169,110,0.15);
+            margin-bottom: 2rem;
+        }
+        .footer-brand img { height: 50px; margin-bottom: 1rem; }
+        .footer-brand p {
+            color: rgba(255,255,255,0.5);
+            font-size: 0.85rem;
+            max-width: 300px;
+            line-height: 1.6;
+        }
+        .footer-links h5 {
+            color: var(--gold);
+            font-size: 0.75rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+        .footer-links ul { list-style: none; }
+        .footer-links li { margin-bottom: 0.5rem; }
+        .footer-links a {
+            color: rgba(255,255,255,0.5);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+        .footer-links a:hover { color: var(--gold); }
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: rgba(255,255,255,0.3);
+            font-size: 0.8rem;
+        }
+
+        /* ─── ANIMATIONS ─── */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ─── RESPONSIVE ─── */
+        @media (max-width: 1024px) {
+            .services-grid { grid-template-columns: repeat(2, 1fr); }
+            .portfolio-grid { grid-template-columns: 1fr 1fr; }
+            .portfolio-item:first-child { grid-column: span 2; }
+        }
+        @media (max-width: 768px) {
+            nav { padding: 1rem 1.5rem; }
+            nav.scrolled { padding: 0.8rem 1.5rem; }
+            .nav-links { display: none; }
+            .burger { display: flex; }
+            .nav-links.active {
+                display: flex; flex-direction: column;
+                position: absolute; top: 100%; left: 0; right: 0;
+                background: var(--navy-deep);
+                padding: 2rem;
+                gap: 1.2rem;
+            }
+            .section { padding: 4rem 1.5rem; }
+            .stats-bar { grid-template-columns: repeat(2, 1fr); padding: 2rem; }
+            .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+            .about-image img { height: 300px; }
+            .services-grid { grid-template-columns: 1fr; }
+            .portfolio-grid { grid-template-columns: 1fr; }
+            .portfolio-item:first-child { grid-column: span 1; height: 300px; }
+            .portfolio-item { height: 250px; }
+            .advantages-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+            .contact-grid { grid-template-columns: 1fr; }
+            .footer-top { flex-direction: column; gap: 2rem; }
+            .footer-bottom { flex-direction: column; gap: 0.5rem; text-align: center; }
+            .hero-cta { flex-direction: column; }
+            .cta-banner { padding: 4rem 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Preloader -->
+<div class="preloader">
+    <div class="preloader-logo">ЕС</div>
+</div>
+
+<!-- Navigation -->
+<nav>
+    <div class="nav-logo">
+        <img src="images/logo.jpg" alt="Евростандарт">
+    </div>
+    <ul class="nav-links">
+        <li><a href="#about">О нас</a></li>
+        <li><a href="#services">Услуги</a></li>
+        <li><a href="#portfolio">Проекты</a></li>
+        <li><a href="#advantages">Преимущества</a></li>
+        <li><a href="#contact" class="nav-contact-btn">Связаться</a></li>
+    </ul>
+    <div class="burger" onclick="toggleMenu()">
+        <span></span><span></span><span></span>
+    </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-content">
+        <div class="hero-badge">Комплексное оснащение</div>
+        <h1>Создаём <span>пространства</span>,<br>в которые хочется вернуться</h1>
+        <p class="hero-sub">Полный цикл оснащения отелей премиум-класса — от концепции до последней детали интерьера</p>
+        <div class="hero-cta">
+            <a href="#contact" class="btn-primary">Обсудить проект</a>
+            <a href="#services" class="btn-outline">Наши решения</a>
+        </div>
+    </div>
+    <div class="hero-scroll"><span></span></div>
+</section>
+
+<!-- Stats -->
+<div class="stats-bar">
+    <div class="stat-item">
+        <div class="stat-num">15+</div>
+        <div class="stat-label">Лет на рынке</div>
+    </div>
+    <div class="stat-item">
+        <div class="stat-num">200+</div>
+        <div class="stat-label">Реализованных проектов</div>
+    </div>
+    <div class="stat-item">
+        <div class="stat-num">50+</div>
+        <div class="stat-label">Отелей оснащено</div>
+    </div>
+    <div class="stat-item">
+        <div class="stat-num">100%</div>
+        <div class="stat-label">Под ключ</div>
+    </div>
+</div>
+
+<!-- About -->
+<section class="about section" id="about">
+    <div class="about-grid">
+        <div class="about-image reveal">
+            <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800&q=80" alt="Отель премиум-класса">
+        </div>
+        <div class="about-text reveal">
+            <span class="section-tag">О компании</span>
+            <h3>Евростандарт — партнёр, которому доверяют лучшие отели</h3>
+            <p>Мы специализируемся на комплексном оснащении отелей под ключ. От первоначальной концепции до финальной реализации — мы берём на себя каждый элемент интерьера.</p>
+            <p>Наша команда работает с ведущими производителями мебели, текстиля, света и отделочных материалов, чтобы ваш отель соответствовал самым высоким стандартам гостеприимства.</p>
+            <div class="about-features">
+                <div class="about-feature"><div class="icon">✦</div> Индивидуальный подход</div>
+                <div class="about-feature"><div class="icon">✦</div> Премиум материалы</div>
+                <div class="about-feature"><div class="icon">✦</div> Полный цикл работ</div>
+                <div class="about-feature"><div class="icon">✦</div> Гарантия качества</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Services -->
+<section class="services section" id="services">
+    <div class="section-header reveal">
+        <span class="section-tag">Направления</span>
+        <h2 class="section-title">Всё для отеля<br>в одном месте</h2>
+        <p class="section-desc">Комплексные решения по оснащению гостиничных номеров, общественных зон и SPA-комплексов</p>
+        <div class="gold-line"></div>
+    </div>
+    <div class="services-grid">
+        <div class="service-card reveal">
+            <span class="service-icon">🛋</span>
+            <h4>Мебель</h4>
+            <p>Корпусная и мягкая мебель для номеров, лобби и ресторанов. Индивидуальное изготовление по проекту.</p>
+        </div>
+        <div class="service-card reveal">
+            <span class="service-icon">🧶</span>
+            <h4>Ковровые покрытия</h4>
+            <p>Профессиональные ковровые покрытия повышенной износостойкости для коридоров, номеров и общественных зон.</p>
+        </div>
+        <div class="service-card reveal">
+            <span class="service-icon">🚪</span>
+            <h4>Двери</h4>
+            <p>Противопожарные, входные и межкомнатные двери с повышенной звукоизоляцией и системами контроля доступа.</p>
+        </div>
+        <div class="service-card reveal">
+            <span class="service-icon">🪟</span>
+            <h4>Шторы</h4>
+            <p>Профессиональные шторные системы: блэкаут, декоративные, рулонные. Негорючие ткани для отелей.</p>
+        </div>
+        <div class="service-card reveal">
+            <span class="service-icon">💡</span>
+            <h4>Освещение</h4>
+            <p>Профессиональный свет для создания атмосферы: от номеров до фасадной подсветки.</p>
+        </div>
+        <div class="service-card reveal">
+            <span class="service-icon">🛏</span>
+            <h4>Постельное бельё и матрасы</h4>
+            <p>Профессиональный текстиль и матрасы гостиничного класса для максимального комфорта гостей.</p>
+        </div>
+        <div class="service-card reveal">
+            <span class="service-icon">🪨</span>
+            <h4>Изделия из камня</h4>
+            <p>Полы, столешницы и элементы декора из натурального мрамора, гранита и оникса.</p>
+        </div>
+        <div class="service-card reveal">
+            <span class="service-icon">🏨</span>
+            <h4>Комплексное решение</h4>
+            <p>Полный цикл оснащения отеля: проектирование, поставка, монтаж и ввод в эксплуатацию.</p>
+        </div>
+    </div>
+</section>
+
+<!-- Portfolio -->
+<section class="portfolio section" id="portfolio">
+    <div class="section-header reveal">
+        <span class="section-tag">Портфолио</span>
+        <h2 class="section-title">Наши проекты</h2>
+        <p class="section-desc">Среди наших клиентов — лучшие отели Красной Поляны и черноморского побережья</p>
+        <div class="gold-line"></div>
+    </div>
+    <div class="portfolio-grid">
+        <div class="portfolio-item reveal">
+            <img src="https://images.unsplash.com/photo-1611892440504-42a792e24d32?w=900&q=80" alt="Vertex Hotel">
+            <div class="portfolio-overlay">
+                <h4>Vertex SPA Hotel</h4>
+                <p>Красная Поляна</p>
+            </div>
+        </div>
+        <div class="portfolio-item reveal">
+            <img src="https://images.unsplash.com/photo-1582719508461-905c673771fd?w=600&q=80" alt="Ultima Club">
+            <div class="portfolio-overlay">
+                <h4>Ultima Club Hotel & SPA</h4>
+                <p>Красная Поляна</p>
+            </div>
+        </div>
+        <div class="portfolio-item reveal">
+            <img src="https://images.unsplash.com/photo-1590490360182-c33d96fd630e?w=600&q=80" alt="Country Hills">
+            <div class="portfolio-overlay">
+                <h4>Country Hills Resort</h4>
+                <p>Красная Поляна</p>
+            </div>
+        </div>
+        <div class="portfolio-item reveal">
+            <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=600&q=80" alt="Мраморные полы">
+            <div class="portfolio-overlay">
+                <h4>Мрамор и гранит</h4>
+                <p>Отделка общественных зон</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Advantages -->
+<section class="advantages section" id="advantages">
+    <div class="section-header reveal">
+        <span class="section-tag">Почему мы</span>
+        <h2 class="section-title">Преимущества работы<br>с Евростандартом</h2>
+        <div class="gold-line"></div>
+    </div>
+    <div class="advantages-grid">
+        <div class="advantage-item reveal">
+            <div class="advantage-num">01</div>
+            <h4>Единый поставщик</h4>
+            <p>Один подрядчик на весь проект — от мебели до камня. Экономия времени и бюджета на координацию.</p>
+        </div>
+        <div class="advantage-item reveal">
+            <div class="advantage-num">02</div>
+            <h4>Профессиональные решения</h4>
+            <p>Работаем только с гостиничным сегментом. Знаем требования к износостойкости, пожарной безопасности и комфорту.</p>
+        </div>
+        <div class="advantage-item reveal">
+            <div class="advantage-num">03</div>
+            <h4>Гарантия и сервис</h4>
+            <p>Полное сопровождение после сдачи объекта. Оперативная замена и ремонт любых элементов оснащения.</p>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Banner -->
+<section class="cta-banner">
+    <div class="cta-content reveal">
+        <h2>Готовы обсудить ваш проект?</h2>
+        <p>Мы рассчитаем стоимость оснащения вашего отеля и предложим оптимальное решение под бюджет</p>
+        <a href="#contact" class="btn-primary">Получить расчёт</a>
+    </div>
+</section>
+
+<!-- Contact -->
+<section class="contact section" id="contact">
+    <div class="section-header reveal">
+        <span class="section-tag">Контакты</span>
+        <h2 class="section-title">Свяжитесь с нами</h2>
+        <div class="gold-line"></div>
+    </div>
+    <div class="contact-grid">
+        <div class="contact-info reveal">
+            <h3>Евростандарт</h3>
+            <p>Мы всегда открыты для обсуждения новых проектов. Свяжитесь с нами удобным способом — и мы подготовим индивидуальное предложение для вашего объекта.</p>
+            <div class="contact-item">
+                <div class="ci-icon">📞</div>
+                <div class="ci-text">
+                    <h5>Телефон</h5>
+                    <a href="tel:+79184414243">8-918-441-42-43</a>
+                </div>
+            </div>
+            <div class="contact-item">
+                <div class="ci-icon">✉️</div>
+                <div class="ci-text">
+                    <h5>Email</h5>
+                    <a href="mailto:eurostandart_sochi@mail.ru">eurostandart_sochi@mail.ru</a>
+                </div>
+            </div>
+            <div class="contact-item">
+                <div class="ci-icon">📍</div>
+                <div class="ci-text">
+                    <h5>Регион работы</h5>
+                    <span>Сочи, Красная Поляна и вся Россия</span>
+                </div>
+            </div>
+        </div>
+        <div class="contact-form reveal">
+            <h4>Оставить заявку</h4>
+            <form onsubmit="handleSubmit(event)">
+                <div class="form-group">
+                    <input type="text" placeholder="Ваше имя" required>
+                </div>
+                <div class="form-group">
+                    <input type="tel" placeholder="Телефон" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" placeholder="Email">
+                </div>
+                <div class="form-group">
+                    <textarea placeholder="Опишите ваш проект: тип объекта, количество номеров, сроки..."></textarea>
+                </div>
+                <button type="submit" class="form-submit">Отправить заявку</button>
+            </form>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer>
+    <div class="footer-top">
+        <div class="footer-brand">
+            <img src="images/logo.jpg" alt="Евростандарт">
+            <p>Комплексное оснащение отелей под ключ. Качество, которое чувствуется в каждой детали.</p>
+        </div>
+        <div class="footer-links">
+            <h5>Навигация</h5>
+            <ul>
+                <li><a href="#about">О компании</a></li>
+                <li><a href="#services">Услуги</a></li>
+                <li><a href="#portfolio">Проекты</a></li>
+                <li><a href="#contact">Контакты</a></li>
+            </ul>
+        </div>
+        <div class="footer-links">
+            <h5>Услуги</h5>
+            <ul>
+                <li><a href="#services">Мебель для отелей</a></li>
+                <li><a href="#services">Ковровые покрытия</a></li>
+                <li><a href="#services">Двери и шторы</a></li>
+                <li><a href="#services">Изделия из камня</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <span>© 2025 ООО «Евростандарт». Все права защищены.</span>
+        <span>Сочи, Краснодарский край</span>
+    </div>
+</footer>
+
+<script>
+    // Preloader
+    window.addEventListener('load', () => {
+        setTimeout(() => {
+            document.querySelector('.preloader').classList.add('hidden');
+        }, 800);
+    });
+
+    // Nav scroll effect
+    window.addEventListener('scroll', () => {
+        const nav = document.querySelector('nav');
+        nav.classList.toggle('scrolled', window.scrollY > 50);
+    });
+
+    // Mobile menu
+    function toggleMenu() {
+        document.querySelector('.nav-links').classList.toggle('active');
+    }
+
+    // Scroll reveal
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, { threshold: 0.15 });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // Form
+    function handleSubmit(e) {
+        e.preventDefault();
+        const btn = e.target.querySelector('.form-submit');
+        btn.textContent = 'Заявка отправлена ✓';
+        btn.style.background = '#2a7d4f';
+        btn.style.color = '#fff';
+        setTimeout(() => {
+            btn.textContent = 'Отправить заявку';
+            btn.style.background = '';
+            btn.style.color = '';
+            e.target.reset();
+        }, 3000);
+    }
+</script>
+
+</body>
+</html>
