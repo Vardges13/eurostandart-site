@@ -460,6 +460,65 @@
             text-transform: uppercase;
         }
 
+        /* ─── PROJECT BLOCKS ─── */
+        .project-block {
+            max-width: 1300px;
+            margin: 0 auto 4rem;
+        }
+        .project-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            color: var(--white);
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+        .project-name span {
+            color: var(--gold);
+            font-weight: 400;
+            font-size: 1.2rem;
+        }
+        .project-desc {
+            color: rgba(255,255,255,0.5);
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+            font-weight: 300;
+        }
+        .gallery-grid {
+            display: grid;
+            gap: 0.8rem;
+        }
+        .gallery-grid.gallery-8 {
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: auto auto;
+        }
+        .gallery-grid.gallery-3 {
+            grid-template-columns: repeat(3, 1fr);
+        }
+        .gallery-item {
+            overflow: hidden;
+            height: 280px;
+            position: relative;
+        }
+        .gallery-grid.gallery-8 .gallery-item:first-child {
+            grid-column: span 2;
+            height: 320px;
+        }
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+        @media (max-width: 768px) {
+            .gallery-grid.gallery-8 { grid-template-columns: repeat(2, 1fr); }
+            .gallery-grid.gallery-3 { grid-template-columns: 1fr; }
+            .gallery-grid.gallery-8 .gallery-item:first-child { grid-column: span 2; }
+            .gallery-item { height: 200px; }
+        }
+
         /* ─── ADVANTAGES ─── */
         .advantages { background: var(--white); }
         .advantages-grid {
@@ -854,34 +913,42 @@
         <p class="section-desc">Среди наших клиентов — лучшие отели Красной Поляны и черноморского побережья</p>
         <div class="gold-line"></div>
     </div>
-    <div class="portfolio-grid">
-        <div class="portfolio-item reveal">
-            <img src="images/vertex_spa.jpg" alt="Vertex SPA Hotel">
-            <div class="portfolio-overlay">
-                <h4>Vertex SPA Hotel</h4>
-                <p>Красная Поляна</p>
-            </div>
+
+    <!-- Country Hills -->
+    <div class="project-block reveal">
+        <h3 class="project-name">Country Hills Resort <span>— Красная Поляна</span></h3>
+        <p class="project-desc">Комплексное оснащение номеров: мебель, ковровые покрытия, шторы, постельное бельё, освещение</p>
+        <div class="gallery-grid gallery-8">
+            <div class="gallery-item"><img src="images/ch_8_room.jpg" alt="Country Hills — номер"></div>
+            <div class="gallery-item"><img src="images/ch_5_living.jpg" alt="Country Hills — гостиная"></div>
+            <div class="gallery-item"><img src="images/ch_4_bed.jpg" alt="Country Hills — кровать"></div>
+            <div class="gallery-item"><img src="images/ch_2_desk.jpg" alt="Country Hills — рабочая зона"></div>
+            <div class="gallery-item"><img src="images/ch_3_tv.jpg" alt="Country Hills — ТВ-зона"></div>
+            <div class="gallery-item"><img src="images/ch_6_sofa.jpg" alt="Country Hills — диван"></div>
+            <div class="gallery-item"><img src="images/ch_1_wardrobe.jpg" alt="Country Hills — шкаф"></div>
+            <div class="gallery-item"><img src="images/ch_7_desk2.jpg" alt="Country Hills — зеркало"></div>
         </div>
-        <div class="portfolio-item reveal">
-            <img src="images/ultima_main.webp" alt="Ultima Club Hotel">
-            <div class="portfolio-overlay">
-                <h4>Ultima Club Hotel & SPA</h4>
-                <p>Красная Поляна</p>
-            </div>
+    </div>
+
+    <!-- Vertex -->
+    <div class="project-block reveal">
+        <h3 class="project-name">Vertex SPA Hotel <span>— Красная Поляна</span></h3>
+        <p class="project-desc">Оснащение отеля класса люкс: альпийский стиль с мрамором, гранитом, деревом и ониксом</p>
+        <div class="gallery-grid gallery-3">
+            <div class="gallery-item"><img src="images/vertex_lobby.jpg" alt="Vertex — лобби"></div>
+            <div class="gallery-item"><img src="images/vertex_room.jpg" alt="Vertex — номер"></div>
+            <div class="gallery-item"><img src="images/vertex_spa.jpg" alt="Vertex — SPA"></div>
         </div>
-        <div class="portfolio-item reveal">
-            <img src="images/country_main.webp" alt="Country Hills Resort">
-            <div class="portfolio-overlay">
-                <h4>Country Hills Resort</h4>
-                <p>Красная Поляна</p>
-            </div>
-        </div>
-        <div class="portfolio-item reveal">
-            <img src="images/vertex_restaurant.jpg" alt="Ресторан отеля">
-            <div class="portfolio-overlay">
-                <h4>Рестораны и лобби</h4>
-                <p>Оснащение общественных зон</p>
-            </div>
+    </div>
+
+    <!-- Ultima Club -->
+    <div class="project-block reveal">
+        <h3 class="project-name">Ultima Club Hotel & SPA <span>— Красная Поляна</span></h3>
+        <p class="project-desc">42 номера: мебель, текстиль, шторы, ковровые покрытия, освещение</p>
+        <div class="gallery-grid gallery-3">
+            <div class="gallery-item"><img src="images/ultima_main.webp" alt="Ultima Club — фасад"></div>
+            <div class="gallery-item"><img src="images/ultima_room.webp" alt="Ultima Club — номер"></div>
+            <div class="gallery-item"><img src="images/ultima_pool.webp" alt="Ultima Club — бассейн"></div>
         </div>
     </div>
 </section>
